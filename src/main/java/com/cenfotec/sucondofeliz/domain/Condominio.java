@@ -1,9 +1,7 @@
 package com.cenfotec.sucondofeliz.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Condominio {
@@ -18,13 +16,18 @@ public class Condominio {
     private String cedulaJuridica;
     private String representante;
     private int unidades;
-    private double cuota;
+
+    @OneToMany(fetch= FetchType.LAZY, mappedBy="cuota")
+    private Set<Couta> cuota;
+
+    @OneToMany(fetch= FetchType.LAZY, mappedBy="amenidades")
+    private Set<Amenidad> amenidades;
 
     public Condominio() {
 
     }
 
-    public Condominio(long id, String nombre, String direccion, String cedulaJuridica, String representante, int unidades, double cuota) {
+    public Condominio(long id, String nombre, String direccion, String cedulaJuridica, String representante, int unidades, Set<Couta> cuota, Set<Amenidad> amenidades) {
         this.id = id;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -32,6 +35,7 @@ public class Condominio {
         this.representante = representante;
         this.unidades = unidades;
         this.cuota = cuota;
+        this.amenidades = amenidades;
     }
 
     public long getId() {
@@ -82,11 +86,19 @@ public class Condominio {
         this.unidades = unidades;
     }
 
-    public double getCuota() {
+    public Set<Couta> getCuota() {
         return cuota;
     }
 
-    public void setCuota(double cuota) {
+    public void setCuota(Set<Couta> cuota) {
         this.cuota = cuota;
+    }
+
+    public Set<Amenidad> getAmenidades() {
+        return amenidades;
+    }
+
+    public void setAmenidades(Set<Amenidad> amenidades) {
+        this.amenidades = amenidades;
     }
 }
