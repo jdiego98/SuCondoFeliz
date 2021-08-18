@@ -1,26 +1,20 @@
 package com.cenfotec.sucondofeliz.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Amenidad {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     private String nombre;
 
+
+    @ManyToOne
+    @JoinColumn(nullable=false)
+    private Condominio condominio;
+
     public Amenidad() {
-
-    }
-
-    public Amenidad(long id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
     }
 
     public long getId() {
@@ -37,5 +31,13 @@ public class Amenidad {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Condominio getCondominio() {
+        return condominio;
+    }
+
+    public void setCondominio(Condominio condominio) {
+        this.condominio = condominio;
     }
 }

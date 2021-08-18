@@ -17,26 +17,17 @@ public class Condominio {
     private String representante;
     private int unidades;
 
-    @OneToMany(fetch= FetchType.LAZY, mappedBy="cuota")
-    private Set<Couta> cuota;
+    @OneToMany(fetch= FetchType.LAZY, mappedBy="condominio")
+    private Set<Cuota> cuota;
 
-    @OneToMany(fetch= FetchType.LAZY, mappedBy="amenidades")
-    private Set<Amenidad> amenidades;
+
+    @OneToMany(fetch= FetchType.LAZY, mappedBy="condominio")
+    private Set<Amenidad> amenidad;
 
     public Condominio() {
 
     }
 
-    public Condominio(long id, String nombre, String direccion, String cedulaJuridica, String representante, int unidades, Set<Couta> cuota, Set<Amenidad> amenidades) {
-        this.id = id;
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.cedulaJuridica = cedulaJuridica;
-        this.representante = representante;
-        this.unidades = unidades;
-        this.cuota = cuota;
-        this.amenidades = amenidades;
-    }
 
     public long getId() {
         return id;
@@ -86,19 +77,19 @@ public class Condominio {
         this.unidades = unidades;
     }
 
-    public Set<Couta> getCuota() {
+    public Set<Cuota> getCuota() {
         return cuota;
     }
 
-    public void setCuota(Set<Couta> cuota) {
+    public void setCuota(Set<Cuota> cuota) {
         this.cuota = cuota;
     }
 
-    public Set<Amenidad> getAmenidades() {
-        return amenidades;
+    public Set<Amenidad> getAmenidad() {
+        return amenidad;
     }
 
-    public void setAmenidades(Set<Amenidad> amenidades) {
-        this.amenidades = amenidades;
+    public void setAmenidad(Set<Amenidad> amenidad) {
+        this.amenidad = amenidad;
     }
 }
