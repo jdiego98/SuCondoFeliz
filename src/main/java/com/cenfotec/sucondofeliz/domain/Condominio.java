@@ -16,6 +16,7 @@ public class Condominio {
     private String cedulaJuridica;
     private String representante;
     private int unidades;
+    private boolean estado;
 
     @OneToMany(fetch= FetchType.LAZY, mappedBy="condominio")
     private Set<Cuota> cuota;
@@ -75,6 +76,14 @@ public class Condominio {
 
     public void setUnidades(int unidades) {
         this.unidades = unidades;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
     public Set<Cuota> getCuota() {

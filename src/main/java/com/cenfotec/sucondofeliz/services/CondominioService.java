@@ -10,5 +10,7 @@ public interface CondominioService {
     public void save(Condominio condominio);
     public Optional<Condominio> get(Long id);
     public List<Condominio> getAll();
+    public List<Condominio> getAllActivos();
+    public List<Condominio> getAllInactivos();
     public void update(Condominio condominio);
 }
