@@ -1,0 +1,29 @@
+type Condominio {
+    id: ID!,
+    nombre: String,
+    direccion: String,
+    cedulaJuridica: String,
+    representante: String,
+    unidades: String,
+    estado: String,
+    cuota: String,
+    eliminado: String,
+    condominios: [Condominio]
+}
+
+type Query {
+    condominios(count: Int):[Condominio],
+    condominio(id: ID): Condominio
+}
+
+type Mutation {
+    createVehicle( nombre: String,
+        direccion: String,
+        cedulaJuridica: String,
+        representante: String,
+        unidades: String,
+        estado: String,
+        cuota: String,
+        eliminado: String,
+        condominios: String): Condominio
+}
