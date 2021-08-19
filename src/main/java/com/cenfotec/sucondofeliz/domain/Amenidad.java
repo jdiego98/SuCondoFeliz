@@ -6,9 +6,8 @@ import javax.persistence.*;
 public class Amenidad {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long idAmenida;
     private String nombre;
-
 
     @ManyToOne
     @JoinColumn(nullable=false)
@@ -17,12 +16,12 @@ public class Amenidad {
     public Amenidad() {
     }
 
-    public long getId() {
-        return id;
+    public long getIdAmenida() {
+        return idAmenida;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setIdAmenida(long idAmenida) {
+        this.idAmenida = idAmenida;
     }
 
     public String getNombre() {

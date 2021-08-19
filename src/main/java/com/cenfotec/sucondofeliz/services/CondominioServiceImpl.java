@@ -1,16 +1,15 @@
 package com.cenfotec.sucondofeliz.services;
 
+import com.cenfotec.sucondofeliz.domain.Amenidad;
 import com.cenfotec.sucondofeliz.domain.Condominio;
 import com.cenfotec.sucondofeliz.domain.Cuota;
+import com.cenfotec.sucondofeliz.repo.AmenidadRepository;
 import com.cenfotec.sucondofeliz.repo.CondominioRepository;
 import com.cenfotec.sucondofeliz.repo.CuotaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class CondominioServiceImpl implements CondominioService{
@@ -20,6 +19,9 @@ public class CondominioServiceImpl implements CondominioService{
 
     @Autowired
     CuotaRepository cuotaRepository;
+
+    @Autowired
+    AmenidadRepository amenidadRepository;
 
     @Override
     public void save(Condominio condominio) {
@@ -94,7 +96,8 @@ public class CondominioServiceImpl implements CondominioService{
         }else {
             // NO EXISTE ESE REGISTRO, ENVIAR EL CODIGO CORRECTO
         }
-
     }
+
+
 
 }

@@ -1,5 +1,6 @@
 package com.cenfotec.sucondofeliz.services;
 
+import com.cenfotec.sucondofeliz.domain.Amenidad;
 import com.cenfotec.sucondofeliz.domain.Condominio;
 
 import java.util.List;
@@ -15,4 +16,5 @@ public interface CondominioService {
     public void update(Condominio condominio);
     public void activar(Long id);
     public void desactivar(Long id);
+
 }

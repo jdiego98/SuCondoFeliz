@@ -7,8 +7,9 @@ import java.util.Optional;
 
 public interface AmenidadService {
 
-    public void save(Amenidad amenidad);
+    public void save(Amenidad amenidad, Long idCondominio);
     public Optional<Amenidad> get(Long id);
-    public List<Amenidad> getAll();
+    public List<Amenidad> getAllByCondominio(Long idCondominio);
+
     public void update(Amenidad amenidad);
 }

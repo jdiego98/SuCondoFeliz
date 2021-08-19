@@ -1,6 +1,8 @@
 package com.cenfotec.sucondofeliz.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,13 +20,12 @@ public class Condominio {
     private int unidades;
     private boolean estado;
 
-//    @OneToMany(fetch= FetchType.LAZY, mappedBy="condominio")
-//    private Set<Cuota> cuota;
-
     private double cuota;
 
-    @OneToMany(fetch= FetchType.LAZY, mappedBy="condominio")
-    private Set<Amenidad> amenidad;
+//
+//    @OneToMany(cascade = CascadeType.ALL, fetch= FetchType.LAZY, mappedBy="c")
+//    private Set<Amenidad> amenidad;
+
 
     public Condominio() {
 
@@ -102,11 +103,11 @@ public class Condominio {
 //        this.cuota = cuota;
 //    }
 
-    public Set<Amenidad> getAmenidad() {
-        return amenidad;
-    }
-
-    public void setAmenidad(Set<Amenidad> amenidad) {
-        this.amenidad = amenidad;
-    }
+//    public Set<Amenidad> getAmenidad() {
+//        return amenidad;
+//    }
+//
+//    public void setAmenidad(Set<Amenidad> amenidad) {
+//        this.amenidad = amenidad;
+//    }
 }

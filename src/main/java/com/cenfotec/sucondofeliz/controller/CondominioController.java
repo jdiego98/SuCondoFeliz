@@ -1,7 +1,9 @@
 package com.cenfotec.sucondofeliz.controller;
 
+import com.cenfotec.sucondofeliz.domain.Amenidad;
 import com.cenfotec.sucondofeliz.domain.Condominio;
 import com.cenfotec.sucondofeliz.domain.Cuota;
+import com.cenfotec.sucondofeliz.services.AmenidadService;
 import com.cenfotec.sucondofeliz.services.CondominioService;
 import com.cenfotec.sucondofeliz.services.CuotaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ public class CondominioController {
 
     @Autowired
     CuotaService cuotaService;
+
+    @Autowired
+    AmenidadService amenidadService;
 
 
 
@@ -52,6 +57,8 @@ public class CondominioController {
         this.condominioService.save(condomnio);
     }
 
+
+
     @PutMapping(value="/condominio")
     public void updateCondominio(@RequestBody Condominio condominio){
         this.condominioService.update(condominio);
@@ -71,5 +78,18 @@ public class CondominioController {
     public List<Cuota> getCuotas(@PathVariable(value = "id") Long id){
         return this.cuotaService.getHistorico(id);
     }
+
+    @PostMapping(value="/condominio/amenidades/{id}")
+    public void createAmenidad(@RequestBody Amenidad amenidad, @PathVariable Long id){
+        this.amenidadService.save(amenidad, id);
+    }
+
+    @GetMapping("/condominio/amenidades/{id}")
+    public List<Amenidad> getAmenidades(@PathVariable(value = "id") Long id){
+        return this.amenidadService.getAllByCondominio(id);
+    }
+
+
+
 
 }
