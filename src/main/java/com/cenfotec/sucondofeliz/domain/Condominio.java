@@ -18,9 +18,10 @@ public class Condominio {
     private int unidades;
     private boolean estado;
 
-    @OneToMany(fetch= FetchType.LAZY, mappedBy="condominio")
-    private Set<Cuota> cuota;
+//    @OneToMany(fetch= FetchType.LAZY, mappedBy="condominio")
+//    private Set<Cuota> cuota;
 
+    private double cuota;
 
     @OneToMany(fetch= FetchType.LAZY, mappedBy="condominio")
     private Set<Amenidad> amenidad;
@@ -29,6 +30,13 @@ public class Condominio {
 
     }
 
+    public double getCuota() {
+        return cuota;
+    }
+
+    public void setCuota(double cuota) {
+        this.cuota = cuota;
+    }
 
     public long getId() {
         return id;
@@ -86,13 +94,13 @@ public class Condominio {
         this.estado = estado;
     }
 
-    public Set<Cuota> getCuota() {
-        return cuota;
-    }
-
-    public void setCuota(Set<Cuota> cuota) {
-        this.cuota = cuota;
-    }
+//    public Set<Cuota> getCuota() {
+//        return cuota;
+//    }
+//
+//    public void setCuota(Set<Cuota> cuota) {
+//        this.cuota = cuota;
+//    }
 
     public Set<Amenidad> getAmenidad() {
         return amenidad;

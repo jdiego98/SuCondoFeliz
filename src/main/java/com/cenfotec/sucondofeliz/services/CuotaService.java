@@ -11,5 +11,6 @@ public interface CuotaService {
     public void save(Cuota cuota);
     public Optional<Cuota> get(Long id);
     public List<Cuota> getAll();
+    public List<Cuota> getHistorico(Long id);
     public void update(Cuota cuota);
 }

@@ -13,4 +13,6 @@ public interface CondominioService {
     public List<Condominio> getAllActivos();
     public List<Condominio> getAllInactivos();
     public void update(Condominio condominio);
+    public void activar(Long id);
+    public void desactivar(Long id);
 }

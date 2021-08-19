@@ -1,8 +1,9 @@
 package com.cenfotec.sucondofeliz.controller;
 
 import com.cenfotec.sucondofeliz.domain.Condominio;
+import com.cenfotec.sucondofeliz.domain.Cuota;
 import com.cenfotec.sucondofeliz.services.CondominioService;
-import org.springframework.beans.ConversionNotSupportedException;
+import com.cenfotec.sucondofeliz.services.CuotaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,11 @@ public class CondominioController {
 
     @Autowired
     CondominioService condominioService;
+
+    @Autowired
+    CuotaService cuotaService;
+
+
 
     @GetMapping("/condominio")
     public List<Condominio> getAllCondiminio(){
@@ -49,6 +55,21 @@ public class CondominioController {
     @PutMapping(value="/condominio")
     public void updateCondominio(@RequestBody Condominio condominio){
         this.condominioService.update(condominio);
+    }
+
+    @PutMapping(value="/condominio/activar/{id}")
+    public void activar(@PathVariable(value = "id") Long id){
+        this.condominioService.activar(id);
+    }
+
+    @PutMapping(value="/condominio/desactivar/{id}")
+    public void desacticar(@PathVariable(value = "id") Long id){
+        this.condominioService.desactivar(id);
+    }
+
+    @GetMapping("/condominio/cuotas/{id}")
+    public List<Cuota> getCuotas(@PathVariable(value = "id") Long id){
+        return this.cuotaService.getHistorico(id);
     }
 
 }
