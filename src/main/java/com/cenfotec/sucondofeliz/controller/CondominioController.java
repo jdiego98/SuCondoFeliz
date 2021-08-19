@@ -101,6 +101,11 @@ public class CondominioController {
         return this.condominioService.getCondominios(id);
     }
 
+    @DeleteMapping("condominio/{id}")
+    public Optional<Condominio> delete(@PathVariable(value="id") Long id){
+        return this.condominioService.delete(id);
+    }
+
 
 
 }

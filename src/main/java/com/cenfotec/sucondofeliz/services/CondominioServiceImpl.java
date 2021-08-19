@@ -131,6 +131,17 @@ public class CondominioServiceImpl implements CondominioService{
         }
     }
 
+    @Override
+    public Optional<Condominio> delete(Long id) {
+        Optional<Condominio> condo = this.condominioRepositoryRepo.findById(id);
+        if(condo.isPresent()){
+            condo.get().setEliminado("ex-condominio");
+            return Optional.of(this.condominioRepositoryRepo.saveAndFlush(condo.get()));
+        }else {
+            // NO EXISTE ESE REGISTRO, ENVIAR EL CODIGO CORRECTO
+            return Optional.empty();
+        }
+    }
 
 
 }

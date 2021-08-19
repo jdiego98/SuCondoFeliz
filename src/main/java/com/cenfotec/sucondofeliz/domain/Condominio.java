@@ -20,6 +20,7 @@ public class Condominio {
     private int unidades;
     private boolean estado;
     private double cuota;
+    private String eliminado;
 
     @OneToMany
     @JoinColumn(name="condominioPadre", referencedColumnName = "id")
@@ -99,6 +100,14 @@ public class Condominio {
 
     public void setCondominios(Set<Condominio> condominios) {
         this.condominios = condominios;
+    }
+
+    public String getEliminado() {
+        return eliminado;
+    }
+
+    public void setEliminado(String eliminado) {
+        this.eliminado = eliminado;
     }
 
 

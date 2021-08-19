@@ -19,5 +19,6 @@ public interface CondominioService {
     public void update(Condominio condominio);
     public void activar(Long id);
     public void desactivar(Long id);
+    public Optional<Condominio> delete(Long id);
 
 }
