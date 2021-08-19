@@ -7,6 +7,7 @@ import com.cenfotec.sucondofeliz.repo.AmenidadRepository;
 import com.cenfotec.sucondofeliz.repo.CondominioRepository;
 import com.cenfotec.sucondofeliz.repo.CuotaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -27,29 +28,34 @@ public class CondominioServiceImpl implements CondominioService{
     public void save(Condominio condominio) {
         condominioRepositoryRepo.save(condominio);
         Cuota cuota = new Cuota(condominio.getCuota(), new Date(), condominio);
-        this.cuotaRepository.save(cuota);
+         this.cuotaRepository.save(cuota);
     }
 
     @Override
-    public void saveCondominio(Condominio condominio, Long id) {
+    public ResponseEntity<Condominio> saveCondominio(Condominio condominio, Long id) {
 
         Optional<Condominio> c = this.condominioRepositoryRepo.findById(id);
-
         if(c.isPresent()){
 
             Condominio nuevoCondominio = this.condominioRepositoryRepo.save(condominio);
-
             c.get().getCondominios().add(nuevoCondominio);
             this.condominioRepositoryRepo.saveAndFlush(c.get());
+            return ResponseEntity.ok().body(nuevoCondominio);
 
         }else {
-            //No existe ese condominio al que se le va a agregar el condominio
+            return ResponseEntity.noContent().build();
         }
     }
 
     @Override
-    public Optional<Condominio> get(Long id) {
-        return condominioRepositoryRepo.findById(id);
+    public ResponseEntity<Condominio> get(Long id) {
+
+        Optional<Condominio> condo = this.condominioRepositoryRepo.findById(id);
+        if(condo.isPresent()){
+            return ResponseEntity.ok().body(condo.get());
+        }else {
+            return ResponseEntity.noContent().build();
+        }
     }
 
     @Override
@@ -82,64 +88,70 @@ public class CondominioServiceImpl implements CondominioService{
     }
 
     @Override
-    public Set<Condominio> getCondominios(Long id) {
+    public ResponseEntity<Set<Condominio>> getCondominios(Long id) {
 
         Optional<Condominio> condo = this.condominioRepositoryRepo.findById(id);
         if(condo.isPresent()){
-            return condo.get().getCondominios();
+            return ResponseEntity.ok().body(condo.get().getCondominios());
+        }else {
+            return ResponseEntity.noContent().build();
+        }
+
+
+    }
+
+    @Override
+    public ResponseEntity<Condominio> update(Condominio condominio) {
+
+        Optional<Condominio> condo = this.condominioRepositoryRepo.findById(condominio.getId());
+
+        if(condo.isPresent()){
+            if(condo.get().getCuota()!= condominio.getCuota()){
+                Cuota cuota = new Cuota(condominio.getCuota(), new Date(), condominio);
+                this.cuotaRepository.save(cuota);
+            }
+
+            this.condominioRepositoryRepo.saveAndFlush(condominio);
+            return ResponseEntity.ok().body(condominio);
 
         }else {
-            // NO EXISTE ESE REGISTRO, ENVIAR EL CODIGO CORRECTO
-
-            return null;
+            return ResponseEntity.noContent().build();
         }
-
 
     }
 
     @Override
-    public void update(Condominio condominio) {
-
-        Condominio condo = this.condominioRepositoryRepo.findById(condominio.getId()).get();
-
-        if(condo.getCuota() != condominio.getCuota()){
-            Cuota cuota = new Cuota(condominio.getCuota(), new Date(), condominio);
-            this.cuotaRepository.save(cuota);
-        }
-        this.condominioRepositoryRepo.saveAndFlush(condominio);
-    }
-
-    @Override
-    public void activar(Long id) {
+    public ResponseEntity<Condominio> activar(Long id) {
         Optional<Condominio> condo = this.condominioRepositoryRepo.findById(id);
         if(condo.isPresent()){
             condo.get().setEstado(true);
             this.condominioRepositoryRepo.saveAndFlush(condo.get());
+            return ResponseEntity.ok().body(condo.get());
         }else {
-            // NO EXISTE ESE REGISTRO, ENVIAR EL CODIGO CORRECTO
+            return ResponseEntity.noContent().build();
         }
     }
 
     @Override
-    public void desactivar(Long id) {
+    public ResponseEntity<Condominio> desactivar(Long id) {
         Optional<Condominio> condo = this.condominioRepositoryRepo.findById(id);
         if(condo.isPresent()){
             condo.get().setEstado(false);
             this.condominioRepositoryRepo.saveAndFlush(condo.get());
+            return ResponseEntity.ok().body(condo.get());
         }else {
-            // NO EXISTE ESE REGISTRO, ENVIAR EL CODIGO CORRECTO
+            return ResponseEntity.noContent().build();
         }
     }
 
     @Override
-    public Optional<Condominio> delete(Long id) {
+    public ResponseEntity<Optional<Condominio>> delete(Long id) {
         Optional<Condominio> condo = this.condominioRepositoryRepo.findById(id);
         if(condo.isPresent()){
             condo.get().setEliminado("ex-condominio");
-            return Optional.of(this.condominioRepositoryRepo.saveAndFlush(condo.get()));
+            return ResponseEntity.ok().body(Optional.of(this.condominioRepositoryRepo.saveAndFlush(condo.get())));
         }else {
-            // NO EXISTE ESE REGISTRO, ENVIAR EL CODIGO CORRECTO
-            return Optional.empty();
+            return ResponseEntity.noContent().build();
         }
     }
 

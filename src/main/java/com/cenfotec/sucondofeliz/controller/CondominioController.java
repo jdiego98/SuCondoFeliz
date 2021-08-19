@@ -6,6 +6,7 @@ import com.cenfotec.sucondofeliz.domain.Cuota;
 import com.cenfotec.sucondofeliz.services.AmenidadService;
 import com.cenfotec.sucondofeliz.services.CondominioService;
 import com.cenfotec.sucondofeliz.services.CuotaService;
+import org.springframework.beans.ConversionNotSupportedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -45,12 +46,7 @@ public class CondominioController {
 
     @GetMapping("/condominio/{id}")
     public ResponseEntity<Condominio> getGameById(@PathVariable(value = "id") Long id) {
-       Optional<Condominio> result = this.condominioService.get(id);
-       if(result.isPresent()){
-           return ResponseEntity.ok().body(result.get());
-       }else {
-           return ResponseEntity.notFound().build();
-       }
+      return this.condominioService.get(id);
     }
 
     @PostMapping(value="/condominio")
@@ -59,25 +55,23 @@ public class CondominioController {
     }
 
     @PostMapping(value="/condominio/{id}")
-    public void createCondominio(@RequestBody Condominio condomnio, @PathVariable Long id){
-        this.condominioService.saveCondominio(condomnio, id);
+    public ResponseEntity<Condominio> createCondominio(@RequestBody Condominio condomnio, @PathVariable Long id){
+        return this.condominioService.saveCondominio(condomnio, id);
     }
 
-
-
     @PutMapping(value="/condominio")
-    public void updateCondominio(@RequestBody Condominio condominio){
-        this.condominioService.update(condominio);
+    public ResponseEntity<Condominio> updateCondominio(@RequestBody Condominio condominio){
+        return this.condominioService.update(condominio);
     }
 
     @PutMapping(value="/condominio/activar/{id}")
-    public void activar(@PathVariable(value = "id") Long id){
-        this.condominioService.activar(id);
+    public ResponseEntity<Condominio> activar(@PathVariable(value = "id") Long id){
+        return this.condominioService.activar(id);
     }
 
     @PutMapping(value="/condominio/desactivar/{id}")
-    public void desacticar(@PathVariable(value = "id") Long id){
-        this.condominioService.desactivar(id);
+    public ResponseEntity<Condominio> desacticar(@PathVariable(value = "id") Long id){
+        return this.condominioService.desactivar(id);
     }
 
     @GetMapping("/condominio/cuotas/{id}")
@@ -97,12 +91,12 @@ public class CondominioController {
 
 
     @GetMapping("/condominio/condominios/{id}")
-    public Set<Condominio> getCondominiosCondo(@PathVariable(value = "id") Long id){
+    public ResponseEntity<Set<Condominio>> getCondominiosCondo(@PathVariable(value = "id") Long id){
         return this.condominioService.getCondominios(id);
     }
 
     @DeleteMapping("condominio/{id}")
-    public Optional<Condominio> delete(@PathVariable(value="id") Long id){
+    public ResponseEntity<Optional<Condominio>> delete(@PathVariable(value="id") Long id){
         return this.condominioService.delete(id);
     }
 
