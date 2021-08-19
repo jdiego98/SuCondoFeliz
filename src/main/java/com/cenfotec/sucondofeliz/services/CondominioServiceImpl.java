@@ -31,6 +31,23 @@ public class CondominioServiceImpl implements CondominioService{
     }
 
     @Override
+    public void saveCondominio(Condominio condominio, Long id) {
+
+        Optional<Condominio> c = this.condominioRepositoryRepo.findById(id);
+
+        if(c.isPresent()){
+
+            Condominio nuevoCondominio = this.condominioRepositoryRepo.save(condominio);
+
+            c.get().getCondominios().add(nuevoCondominio);
+            this.condominioRepositoryRepo.saveAndFlush(c.get());
+
+        }else {
+            //No existe ese condominio al que se le va a agregar el condominio
+        }
+    }
+
+    @Override
     public Optional<Condominio> get(Long id) {
         return condominioRepositoryRepo.findById(id);
     }

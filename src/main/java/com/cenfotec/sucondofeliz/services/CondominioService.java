@@ -9,6 +9,7 @@ import java.util.Optional;
 public interface CondominioService {
 
     public void save(Condominio condominio);
+    public void saveCondominio(Condominio condominio, Long id);
     public Optional<Condominio> get(Long id);
     public List<Condominio> getAll();
     public List<Condominio> getAllActivos();

@@ -57,6 +57,11 @@ public class CondominioController {
         this.condominioService.save(condomnio);
     }
 
+    @PostMapping(value="/condominio/{id}")
+    public void createCondominio(@RequestBody Condominio condomnio, @PathVariable Long id){
+        this.condominioService.saveCondominio(condomnio, id);
+    }
+
 
 
     @PutMapping(value="/condominio")

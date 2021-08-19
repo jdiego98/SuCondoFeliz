@@ -19,13 +19,11 @@ public class Condominio {
     private String representante;
     private int unidades;
     private boolean estado;
-
     private double cuota;
 
-//
-//    @OneToMany(cascade = CascadeType.ALL, fetch= FetchType.LAZY, mappedBy="c")
-//    private Set<Amenidad> amenidad;
-
+    @OneToMany
+    @JoinColumn(name="condominioPadre", referencedColumnName = "id")
+    private Set<Condominio> condominios;
 
     public Condominio() {
 
@@ -95,19 +93,13 @@ public class Condominio {
         this.estado = estado;
     }
 
-//    public Set<Cuota> getCuota() {
-//        return cuota;
-//    }
-//
-//    public void setCuota(Set<Cuota> cuota) {
-//        this.cuota = cuota;
-//    }
+    public Set<Condominio> getCondominios() {
+        return condominios;
+    }
 
-//    public Set<Amenidad> getAmenidad() {
-//        return amenidad;
-//    }
-//
-//    public void setAmenidad(Set<Amenidad> amenidad) {
-//        this.amenidad = amenidad;
-//    }
+    public void setCondominios(Set<Condominio> condominios) {
+        this.condominios = condominios;
+    }
+
+
 }
