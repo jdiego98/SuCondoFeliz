@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 public class CondominioController {
@@ -94,6 +95,11 @@ public class CondominioController {
         return this.amenidadService.getAllByCondominio(id);
     }
 
+
+    @GetMapping("/condominio/condominios/{id}")
+    public Set<Condominio> getCondominiosCondo(@PathVariable(value = "id") Long id){
+        return this.condominioService.getCondominios(id);
+    }
 
 
 

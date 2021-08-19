@@ -82,6 +82,22 @@ public class CondominioServiceImpl implements CondominioService{
     }
 
     @Override
+    public Set<Condominio> getCondominios(Long id) {
+
+        Optional<Condominio> condo = this.condominioRepositoryRepo.findById(id);
+        if(condo.isPresent()){
+            return condo.get().getCondominios();
+
+        }else {
+            // NO EXISTE ESE REGISTRO, ENVIAR EL CODIGO CORRECTO
+
+            return null;
+        }
+
+
+    }
+
+    @Override
     public void update(Condominio condominio) {
 
         Condominio condo = this.condominioRepositoryRepo.findById(condominio.getId()).get();
